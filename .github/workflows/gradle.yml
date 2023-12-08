@@ -28,11 +28,10 @@ jobs:
       - name: Run checks and tests
         run: ./gradlew check
       - name: Upload analysis to GitHub
-          uses: actions/upload-artifact@v3
-          if: always()
-          with:
-            name: check-results
-            path: |
-              build/reports
-            if-no-files-found: error
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: check-results
+          path: build/reports
+          if-no-files-found: error
 
