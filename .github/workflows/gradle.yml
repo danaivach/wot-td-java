@@ -1,6 +1,6 @@
-# This workflow builds the project with Gradle, generates coverage reports, 
+# This workflow builds the project with Gradle, generates coverage reports,
 # and pushes the reports to Codecov
-name: build 
+name: build
 
 on:
   push:
@@ -27,8 +27,14 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Generate coverage report
-      run: ./gradlew jacocoTestReport
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+    - name: Run checks and tests
+      run: ./gradlew check
+    - name: Upload analysis to GitHub
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: check-results
+          path: |
+            build/reports
+          if-no-files-found: error
 
