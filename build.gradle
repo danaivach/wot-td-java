@@ -14,10 +14,12 @@ java {
 }
 
 checkstyle {
+  toolVersion = '10.12.5'
   config = resources.text.fromFile("${rootProject.projectDir}/checkstyle.xml")
 }
 
 pmd {
+  toolVersion = "6.53.0"
   ruleSetConfig = resources.text.fromFile("${rootProject.projectDir}/pmd.xml")
 }
 
@@ -52,7 +54,7 @@ javadoc {
 tasks {
 
   test {
-    useJUnitPlatform()
+    useJUnit()
     finalizedBy(jacocoTestReport)
   }
 
